@@ -28,14 +28,14 @@ public class PersonajeController {
         return personaje.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ADMIN")
     @PostMapping
     public ResponseEntity<Personaje> createPersonaje(@RequestBody Personaje personaje) {
         Personaje nuevoPersonaje = personajeRepository.save(personaje);
         return ResponseEntity.status(201).body(nuevoPersonaje);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ADMIN")
     @PutMapping("/{id}")
     public ResponseEntity<Personaje> updatePersonaje(@PathVariable Long id, @RequestBody Personaje personaje) {
         if (!personajeRepository.existsById(id)) {
@@ -46,7 +46,7 @@ public class PersonajeController {
         return ResponseEntity.ok(updatedPersonaje);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("ADMIN")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePersonaje(@PathVariable Long id) {
         if (!personajeRepository.existsById(id)) {
